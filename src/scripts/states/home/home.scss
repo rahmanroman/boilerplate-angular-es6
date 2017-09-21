@@ -1,0 +1,9 @@
+@import "scss/mixin";
+
+$color: red;
+
+h1 {
+    color: $color;
+    display: grid;
+    @include clearfix;
+}

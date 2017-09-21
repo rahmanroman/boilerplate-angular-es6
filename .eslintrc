@@ -1,0 +1,28 @@
+{
+    "extends": "eslint-config-defaults",
+    "parser": "babel-eslint",
+    "plugins": [
+        "angular"
+    ],
+    "env": {
+        "es6": true,
+        "browser": true,
+        "node": true
+    },
+    "globals": {
+        "angular": false,
+        "CONFIG": true
+    },
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "ecmaFeatures": {
+        "modules": true
+    },
+    "rules": {
+        "no-console": 0,
+        "no-debugger": 1,
+        "no-var": 1,
+        "angular/controller_name": 0
+    }
+}

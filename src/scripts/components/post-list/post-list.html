@@ -1,0 +1,8 @@
+<div class="post-list">
+    <div class="post-list-item"
+         ng-repeat="post in $ctrl.state.posts | limitTo:$ctrl.state.count"
+         ng-click="$ctrl.click($index, post)">
+        <h4>{{ post.title }}</h4>
+        <p>{{ post.body }}</p>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+.post-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.post-list-item {
+    width: 25%;
+    padding: 0 1rem 1.5rem;
+    cursor: pointer;
+}
