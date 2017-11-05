@@ -25,10 +25,10 @@ bootstrap.config(function ($stateProvider) {
 
         template: template
 
-        // controller: function ($timeout, $q, RxStore, JsonPlaceholder) {
+        // controller: function ($timeout, $q, Store, JsonPlaceholder) {
         //     "ngInject";
         //
-        //     // let store1 = RxStore.create({x: 0});
+        //     // let store1 = Store.create({x: 0});
         //     //
         //     // store1.subscribe(function (state) {
         //     //     console.log('gotcha1', state);
@@ -69,7 +69,7 @@ bootstrap.config(function ($stateProvider) {
         //     //
         //     // // store1.dispatch();
         //
-        //     let storeUsers = RxStore.create({count: 0});
+        //     let storeUsers = Store.create({count: 0});
         //
         //     storeUsers.subscribe(function (users) {
         //         console.log('users', users);

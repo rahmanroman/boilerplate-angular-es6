@@ -14,7 +14,8 @@
         "CONFIG": true
     },
     "parserOptions": {
-        "sourceType": "module"
+        "sourceType": "module",
+        "ecmaVersion": 2017
     },
     "ecmaFeatures": {
         "modules": true

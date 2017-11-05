@@ -1,4 +1,4 @@
-# Angular boilerplate
+# Angular ES6 boilerplate
 
 Yet another application boilerplate based on NodeJs and Angular 1.x
 
@@ -53,7 +53,7 @@ Use `AngularJs 1.x` + `Angular UI-Router`
 
 Use `SCSS`
 
-Use `gulp` as build process runner
+Use `gulp` + `webpack` in build process
 
 ## To do
 
@@ -62,8 +62,8 @@ Use `gulp` as build process runner
 1. Angular UI-Router https://github.com/ui-router/sample-app-angularjs https://plnkr.co/edit/2SSO4Y?p=preview
 1. Babel `stage-0` switch on (async/await etc.)
 1. Build assets (images, html etc.)
-1. Build PWA (favicons, manifest, service worker)
-1. Use boilerplate:
+1. Build PWA (favicons, manifest, service worker) https://www.npmjs.com/package/sw-precache-webpack-plugin
+1. Review boilerplate:
     - https://github.com/AngularClass/NG6-starter
     - https://github.com/tomastrajan/angular-js-es6-testing-example
 1. Css in Js

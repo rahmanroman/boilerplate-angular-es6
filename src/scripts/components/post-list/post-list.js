@@ -12,13 +12,14 @@ class PostListCtrl {
 
         this.JsonStore = JsonStore;
 
-        JsonStore.subscribe((state, type) => {
+        JsonStore.subscribe((state, type, payload) => {
             this.state = state;
 
             if ((type === JSON_STORE_LOAD || type === JSON_STORE_INCREASE_COUNT) && this.state.count < 100) {
                 // $timeout(() => {
                 //     JsonStore.increase();
                 // }, 1500);
+                console.log(type, payload);
             }
         });
 

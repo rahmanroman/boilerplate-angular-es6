@@ -1,9 +1,9 @@
 import bootstrap from 'bootstrap';
 
-bootstrap.service('RxStore', function ($q) {
+bootstrap.service('Store', function ($q) {
     "ngInject";
 
-    class RxStore {
+    class Store {
         constructor(initialState) {
             this.state = initialState;
             this.listeners = [];
@@ -21,23 +21,28 @@ bootstrap.service('RxStore', function ($q) {
                 throw new Error('Listener is not a function: subscribe takes only listeners as functions.');
             }
 
-            this.listeners = this.listeners.concat(listener);
-            // TODO: return unscubscribe function;
+            this.listeners = [...this.listeners, listener];
+
+            listener({
+                ...this.state
+            });
+
+            return () => (this.listeners = this.listeners.filter(_listener => _listener !== listener));
         }
 
-        dispatch(reducer, type) {
+        dispatch(reducer, type, payload) {
             if (typeof reducer !== 'function') {
                 throw new Error('Reducer is not a function: dispatch takes only reducers as functions.');
             }
 
             if (this.isDispatching === true) {
-                this.dispatchingQueue.push({reducer, type});
+                this.dispatchingQueue.push({reducer, type, payload});
             } else {
-                this.execute(reducer(this.state), type);
+                this.execute(reducer(this.state), type, payload);
             }
         }
 
-        execute(asyncState, type) {
+        execute(asyncState, type, payload) {
             this.isDispatching = true;
 
             $q.when(asyncState)
@@ -45,7 +50,7 @@ bootstrap.service('RxStore', function ($q) {
                     this.state = state;
 
                     for (let i = 0; i < this.listeners.length; i++) {
-                        this.listeners[i](Object.assign({}, this.state), type);
+                        this.listeners[i]({...this.state}, type, payload);
                     }
 
                     this.isDispatching = false;
@@ -60,8 +65,8 @@ bootstrap.service('RxStore', function ($q) {
 
         next() {
             if (this.dispatchingQueue.length > 0) {
-                let {reducer, type} = this.dispatchingQueue.shift();
-                this.execute(reducer(this.state), type);
+                let {reducer, type, payload} = this.dispatchingQueue.shift();
+                this.execute(reducer(this.state), type, payload);
             }
         }
 
@@ -70,5 +75,5 @@ bootstrap.service('RxStore', function ($q) {
         }
     }
 
-    return RxStore;
+    return Store;
 });

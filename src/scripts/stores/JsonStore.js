@@ -1,12 +1,12 @@
-import 'services/store/RxStore';
+import 'services/store/Store';
 import 'resources/JsonPlaceholder';
 
 import bootstrap from 'bootstrap';
 
-bootstrap.factory('JsonStore', function (RxStore, JsonPlaceholder) {
+bootstrap.factory('JsonStore', function (Store, JsonPlaceholder) {
     "ngInject";
 
-    class JsonStore extends RxStore {
+    class JsonStore extends Store {
         load() {
             this.dispatch(state => {
                 return JsonPlaceholder.posts().then((posts) => {
@@ -24,14 +24,14 @@ bootstrap.factory('JsonStore', function (RxStore, JsonPlaceholder) {
                     ...state,
                     count: state.count + amount
                 }
-            }, JSON_STORE_INCREASE_COUNT);
+            }, JSON_STORE_INCREASE_COUNT, amount);
         }
 
         remove(index) {
             this.dispatch(state => {
                 return {
                     ...state,
-                    posts: RxStore.removeFromArray(state.posts, index)
+                    posts: Store.removeFromArray(state.posts, index)
                 }
             }, JSON_STORE_REMOVE);
         }
