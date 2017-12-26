@@ -23,13 +23,13 @@ const commonConfig = {
     server: {
         proxy: {
             'https://jsonplaceholder.typicode.com': {
-                pathRewrite: {
-                    '^/jsonplaceholder/api/': '/'
-                },
-
                 routes: [
                     '/jsonplaceholder/api'
                 ],
+
+                pathRewrite: {
+                    '^/jsonplaceholder/api/': '/'
+                },
 
                 headers: {
                     'Authorization': 'Bearer 1234567890ABCDEF'

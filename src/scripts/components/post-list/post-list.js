@@ -3,28 +3,34 @@ import {
     JSON_STORE_INCREASE_COUNT
 } from 'stores/JsonStore';
 
-import template from 'components/post-list/post-list.html';
-import 'components/post-list/post-list.scss';
+import { Component, Inject } from 'bootstrap';
 
+@Component({
+    selector: 'postList',
+    templateUrl: 'components/post-list/post-list.html',
+    styleUrl: 'components/post-list/post-list.scss',
+    bindings: {}
+})
+@Inject('$interval', 'JsonStore')
 class PostListCtrl {
-    constructor($timeout, JsonStore) {
-        "ngInject";
-
+    constructor($interval, JsonStore) {
         this.JsonStore = JsonStore;
 
-        JsonStore.subscribe((state, type, payload) => {
+        JsonStore.subscribe((state, type) => {
             this.state = state;
 
             if ((type === JSON_STORE_LOAD || type === JSON_STORE_INCREASE_COUNT) && this.state.count < 100) {
-                // $timeout(() => {
-                //     JsonStore.increase();
-                // }, 1500);
-                console.log(type, payload);
+                // console.log(type, payload);
             }
         });
 
         JsonStore.load();
-        JsonStore.increase(19);
+        // JsonStore.increase(19);
+
+        let promise = $interval(() => {
+            if (this.state.count <= 10) JsonStore.increase();
+            else $interval.cancel(promise);
+        }, 500);
     }
 
     click(index) {
@@ -48,10 +54,4 @@ class PostListCtrl {
     // }
 }
 
-import bootstrap from 'bootstrap';
-
-bootstrap.component('postList', {
-    bindings: {},
-    template: template,
-    controller: PostListCtrl
-});
+export default PostListCtrl;

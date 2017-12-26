@@ -1,9 +1,13 @@
 import 'services/http/TransformResponse'
 
-class JsonPlaceholder {
-    constructor($resource, TransformResponse) {
-        "ngInject";
+import { Inject, Service } from "bootstrap";
 
+@Service({
+    name: 'JsonPlaceholderResource'
+})
+@Inject('$resource', 'TransformResponse')
+class JsonPlaceholderResource {
+    constructor($resource, TransformResponse) {
         this.resource = $resource('jsonplaceholder/api/:service/:id', {}, {
             'post_list': {
                 method: 'GET',
@@ -38,8 +42,7 @@ class JsonPlaceholder {
     users() {
         return this.resource.user_list().$promise;
     }
+
 }
 
-import bootstrap from 'bootstrap';
-
-bootstrap.service('JsonPlaceholder', JsonPlaceholder);
+export default JsonPlaceholderResource;

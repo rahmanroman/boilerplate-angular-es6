@@ -31,6 +31,5 @@ gulp.task('serve', ['watch'], function () {
         ui: {
             port: config.server.port + 1
         }
-    })
-    ;
+    });
 });

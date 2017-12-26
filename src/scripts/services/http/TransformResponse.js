@@ -1,5 +1,10 @@
 import angular from 'angular';
 
+import { Service } from "bootstrap";
+
+@Service({
+    name: 'TransformResponse'
+})
 class TransformResponse {
     expectObject() {
         return function expectObject(data, headers, status) {
@@ -23,9 +28,5 @@ class TransformResponse {
         }
     }
 }
-
-import bootstrap from 'bootstrap';
-
-bootstrap.service('TransformResponse', TransformResponse);
 
 export default TransformResponse;

@@ -1,16 +1,26 @@
-import bootstrap from 'bootstrap';
+import 'services/store/StoreLogger';
+
+import 'states/home/home';
 
 import 'app.scss';
 
-bootstrap
-    .config(function ($locationProvider,
-                      $compileProvider,
-                      $httpProvider,
-                      $qProvider,
-                      $localStorageProvider,
-                      $urlRouterProvider) {
-        "ngInject";
+import { Inject, Config, Run } from "bootstrap";
 
+class Application {
+    @Config()
+    @Inject(
+        '$locationProvider',
+        '$compileProvider',
+        '$httpProvider',
+        '$qProvider',
+        '$localStorageProvider',
+        '$urlRouterProvider')
+    static ApplicationConfig($locationProvider,
+                             $compileProvider,
+                             $httpProvider,
+                             $qProvider,
+                             $localStorageProvider,
+                             $urlRouterProvider) {
         $locationProvider.html5Mode(true);
 
         $compileProvider.debugInfoEnabled(CONFIG.dev);
@@ -22,11 +32,15 @@ bootstrap
         $localStorageProvider.setKeyPrefix('ls.');
 
         $urlRouterProvider.otherwise('/');
-    })
+    }
 
-    .run(function () {
-        "ngInject";
-    });
+    @Run()
+    @Inject('StoreLogger', 'JsonStore')
+    static ApplicationRun(StoreLogger, JsonStore) {
+        if (CONFIG.dev) {
+            StoreLogger.log('JsonStore', JsonStore);
+        }
+    }
+}
 
-import 'states/home/home';
-
+export default Application;

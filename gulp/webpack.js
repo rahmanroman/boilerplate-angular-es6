@@ -22,11 +22,13 @@ WEBPACK_CONFIG.plugins = WEBPACK_CONFIG.plugins.concat([
         name: 'vendor'
     }),
 
-    new ExtractTextPlugin('styles/style.css')
+    new ExtractTextPlugin('styles/style.css'),
+
+    new webpack.optimize.ModuleConcatenationPlugin()
 ]);
 
 const WEBPACK_OUTPUT = {
-    colors: true,
+    colors: false,
     hash: false,
     version: false,
     timings: true,
@@ -47,9 +49,8 @@ gulp.task('webpack', function (cb) {
         // if (err) {
         //     throw new gutil.PluginError('webpack', err);
         // }
-        //
-        gutil.log('[webpack]', stats.toString(WEBPACK_OUTPUT));
 
+        gutil.log('[webpack]', stats.toString(WEBPACK_OUTPUT));
         cb();
     });
 });
