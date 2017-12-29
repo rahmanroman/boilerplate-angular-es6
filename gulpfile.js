@@ -16,7 +16,3 @@ gulp.task('clean', function () {
     return gulp.src('./public/**/*', {read: false})
         .pipe(clean());
 });
-
-gulp.task('config', function () {
-    console.log(require('./config'));
-});

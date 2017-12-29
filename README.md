@@ -76,7 +76,7 @@ class PostListComponent {
 1. Frontend features
     - Babel `stage-0` switch on (async/await etc.)
     - Assets 
-        - https://github.com/tcoopman/image-webpack-loader
+        - [+] https://github.com/tcoopman/image-webpack-loader
         - https://github.com/jantimon/iconfont-webpack-plugin, https://github.com/artofrawr/webpack-iconfont-plugin
     - PWA
         - https://github.com/jantimon/favicons-webpack-plugin

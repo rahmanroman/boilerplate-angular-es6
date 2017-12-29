@@ -1,8 +1,7 @@
 import 'services/store/StoreLogger';
 
-import 'states/home/home';
-
 import 'app.scss';
+import 'states/home/home';
 
 import { Inject, Config, Run } from "bootstrap";
 

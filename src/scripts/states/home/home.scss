@@ -4,6 +4,11 @@ $color: red;
 
 h1 {
     color: $color;
-    display: grid;
     @include clearfix;
+    display: flex;
+    align-items: center;
+
+    img {
+        margin-right: 1rem;
+    }
 }

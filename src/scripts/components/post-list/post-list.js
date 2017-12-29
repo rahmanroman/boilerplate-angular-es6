@@ -12,7 +12,7 @@ import { Component, Inject } from 'bootstrap';
     bindings: {}
 })
 @Inject('$interval', 'JsonStore')
-class PostListCtrl {
+class PostListComponent {
     constructor($interval, JsonStore) {
         this.JsonStore = JsonStore;
 
@@ -54,4 +54,4 @@ class PostListCtrl {
     // }
 }
 
-export default PostListCtrl;
+export default PostListComponent;

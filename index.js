@@ -10,12 +10,12 @@ process.on('uncaughtException', (err) => {
 
 const app = connect();
 
-[
+[].concat(
     require('helmet')(),
     require('./backend/proxy'),
     require('./backend/static'),
     require('./backend/history-api')
-].map(function (middleware) {
+).map(function (middleware) {
     app.use(middleware);
 });
 

@@ -63,11 +63,14 @@ export function Component(options) {
             throw new Error('@Component() must contains selector property!');
         }
 
-        let template = _request(`./${options.templateUrl}`);
-        _request(`./${options.styleUrl}`);
+        if (options.templateUrl) {
+            options.template = _request(`./${options.templateUrl}`);
+            delete options.templateUrl;
+        }
 
-        delete options.templateUrl;
-        options.template = template;
+        if (options.styleUrl) {
+            _request(`./${options.styleUrl}`);
+        }
 
         options.controllerAs = options.controllerAs || '$ctrl';
         options.controller = target;
@@ -80,11 +83,14 @@ export function Component(options) {
 
 export function Route(options) {
     return (target) => {
-        let template = _request(`./${options.templateUrl}`);
-        _request(`./${options.styleUrl}`);
+        if (options.templateUrl) {
+            options.template = _request(`./${options.templateUrl}`);
+            delete options.templateUrl;
+        }
 
-        delete options.templateUrl;
-        options.template = template;
+        if (options.styleUrl) {
+            _request(`./${options.styleUrl}`);
+        }
 
         options.controllerAs = options.controllerAs || '$ctrl';
         options.controller = target;

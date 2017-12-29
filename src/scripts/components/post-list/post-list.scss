@@ -6,6 +6,9 @@
 
 .post-list-item {
     width: 25%;
-    padding: 0 1rem 1.5rem;
+    padding: 0 1rem 1.5rem 42px;
     cursor: pointer;
+
+    background: url("post.png") 0 0 no-repeat;
+    background-size: 32px 32px;
 }
