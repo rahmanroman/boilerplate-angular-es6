@@ -21,12 +21,14 @@ class JsonStore extends Store {
     }
 
     load() {
-        this.JsonPlaceholderResource.posts().then(posts => {
-            this.dispatch(state => ({
-                ...state,
-                posts
-            }), JSON_STORE_LOAD);
-        });
+        if (this.state.posts.length === 0) {
+            this.JsonPlaceholderResource.posts().then(posts => {
+                this.dispatch(state => ({
+                    ...state,
+                    posts
+                }), JSON_STORE_LOAD);
+            });
+        }
     }
 
     increase(amount = 1) {
@@ -36,6 +38,15 @@ class JsonStore extends Store {
                 count: state.count + amount
             }
         }, JSON_STORE_INCREASE_COUNT, amount);
+    }
+
+    reset() {
+        this.dispatch(state => {
+            return {
+                ...state,
+                count: 0
+            }
+        })
     }
 
     remove(index) {

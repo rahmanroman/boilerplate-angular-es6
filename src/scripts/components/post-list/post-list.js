@@ -1,8 +1,8 @@
-import {
-    JSON_STORE_LOAD,
-    JSON_STORE_INCREASE_COUNT
-} from 'stores/JsonStore';
-
+// import {
+//     JSON_STORE_LOAD,
+//     JSON_STORE_INCREASE_COUNT
+// } from 'stores/JsonStore';
+//
 import { Component, Inject } from 'bootstrap';
 
 @Component({
@@ -14,21 +14,24 @@ import { Component, Inject } from 'bootstrap';
 @Inject('$interval', 'JsonStore')
 class PostListComponent {
     constructor($interval, JsonStore) {
+        this.$interval = $interval;
         this.JsonStore = JsonStore;
 
-        JsonStore.subscribe((state, type) => {
+        JsonStore.subscribe((state) => {
             this.state = state;
-
-            if ((type === JSON_STORE_LOAD || type === JSON_STORE_INCREASE_COUNT) && this.state.count < 100) {
-                // console.log(type, payload);
-            }
         });
 
         JsonStore.load();
-        // JsonStore.increase(19);
+        this.start();
+    }
+
+    start() {
+        let {$interval, JsonStore} = this;
+
+        JsonStore.reset();
 
         let promise = $interval(() => {
-            if (this.state.count <= 10) JsonStore.increase();
+            if (this.state.count < 10) JsonStore.increase();
             else $interval.cancel(promise);
         }, 500);
     }

@@ -7,9 +7,10 @@ const ExtendedDefinePlugin = require('extended-define-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const StyleExtHtmlWebpackPlugin = require('style-ext-html-webpack-plugin');
+// const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 const config = require('./config');
-const pkg = require('./package.json');
+// const pkg = require('./package.json');
 
 const noop = (() => {
 });
@@ -21,8 +22,7 @@ const rules = [
         use: [{
             loader: 'ng-annotate-loader'
         }, {
-            loader: 'babel-loader',
-            // options: pkg.babel
+            loader: 'babel-loader'
         }]
     },
 
@@ -103,11 +103,40 @@ const plugins = [
         }
     }),
 
+    new ExtractTextPlugin('styles/style.css'),
+
+    // new FaviconsWebpackPlugin({
+    //     logo:  path.join(config.path.src, 'logo.png'),
+    //
+    //     prefix: null,
+    //     emitStats: false,
+    //     statsFilename: '',
+    //     persistentCache: false,
+    //     inject: true,
+    //
+    //     background: '#fff',
+    //     title: pkg.name,
+    //     description: 'WTF?!?!?',
+    //     version: parseFloat(pkg.version),
+    //     start_url: '/?utm_source=homescreen',
+    //
+    //     icons: {
+    //         android: true,
+    //         appleIcon: true,
+    //         appleStartup: true,
+    //         coast: false,
+    //         favicons: true,
+    //         firefox: true,
+    //         opengraph: true,
+    //         twitter: false,
+    //         yandex: false,
+    //         windows: true
+    //     }
+    // }),
+
     new webpack.optimize.CommonsChunkPlugin({
         name: 'vendor'
     }),
-
-    new ExtractTextPlugin('styles/style.css'),
 
     new webpack.optimize.ModuleConcatenationPlugin()
 ].concat(config.dev

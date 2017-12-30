@@ -26,7 +26,7 @@ class HomeRoute {
     constructor(users) {
         "njInject";
 
-        console.log('Users', users);
+        // console.log('Users', users);
     }
 }
 

@@ -1,4 +1,5 @@
 import 'services/store/StoreLogger';
+import 'services/store/StorePersistent';
 
 import 'app.scss';
 import 'states/home/home';
@@ -34,11 +35,13 @@ class Application {
     }
 
     @Run()
-    @Inject('StoreLogger', 'JsonStore')
-    static ApplicationRun(StoreLogger, JsonStore) {
+    @Inject('StoreLogger', 'StorePersistent', 'JsonStore')
+    static ApplicationRun(StoreLogger, StorePersistent, JsonStore) {
         if (CONFIG.dev) {
             StoreLogger.log('JsonStore', JsonStore);
         }
+
+        StorePersistent.store('JsonStore', JsonStore);
     }
 }
 
