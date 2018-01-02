@@ -10,6 +10,10 @@ class Store {
         return Object.assign({}, this.state);
     }
 
+    clear() {
+        this.dispatch(() => ({}), 'CLEAR');
+    }
+
     subscribe(listener) {
         if (typeof listener !== 'function') {
             throw new Error('Listener is not a function: subscribe takes only listeners as functions.');

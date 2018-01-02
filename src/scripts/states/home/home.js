@@ -21,12 +21,15 @@ import { Route, Inject } from "bootstrap";
     styleUrl: 'states/home/home.scss'
 
 })
-@Inject('users')
+@Inject('users', 'AuthStore')
 class HomeRoute {
-    constructor(users) {
-        "njInject";
+    constructor(users, AuthStore) {
+        this.users = users;
+        this.AuthStore = AuthStore;
+    }
 
-        // console.log('Users', users);
+    logout() {
+        this.AuthStore.logout();
     }
 }
 

@@ -26,14 +26,14 @@ class PostListComponent {
     }
 
     start() {
-        let {$interval, JsonStore} = this;
-
-        JsonStore.reset();
-
-        let promise = $interval(() => {
-            if (this.state.count < 10) JsonStore.increase();
-            else $interval.cancel(promise);
-        }, 500);
+        // let {$interval, JsonStore} = this;
+        //
+        // JsonStore.reset();
+        //
+        // let promise = $interval(() => {
+        //     if (this.state.count < 10) JsonStore.increase();
+        //     else $interval.cancel(promise);
+        // }, 500);
     }
 
     click(index) {
