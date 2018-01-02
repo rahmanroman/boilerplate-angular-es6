@@ -10,7 +10,7 @@ import { Route, Inject } from "bootstrap";
     url: '/',
 
     data: {
-        authorities: ['ROLE_USER', 'ROLE_ADMIN']
+        authorities: ['USER']
     },
 
     resolve: {

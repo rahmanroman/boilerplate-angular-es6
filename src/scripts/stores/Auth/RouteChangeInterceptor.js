@@ -13,7 +13,11 @@ class RouteChangeInterceptor {
             let toState = transition.to();
 
             if (!AuthStore.hasAuthorities(toState.data.authorities)) {
-                return $state.target('login', undefined, {location: true});
+                return $state.target(
+                    AuthStore.isAuthenticated() ? 'home' : 'login',
+                    undefined,
+                    {location: true}
+                );
             }
 
             // console.log(transition.treeChanges().to
@@ -24,11 +28,15 @@ class RouteChangeInterceptor {
             priority: 10
         });
 
-        AuthStore.subscribe((state, type/*, payload*/) => {
+        AuthStore.subscribe((state, type) => {
             switch (type) {
                 case 'SET_ROLES':
-                    // TODO: check roles
-                    $state.go('home');
+                    let state = $state.current;
+
+                    if (state.data && state.data.authorities && !AuthStore.hasAuthorities(state.data.authorities)) {
+                        $state.go(AuthStore.isAuthenticated() ? 'home' : 'login');
+                    }
+
                     break;
 
                 case 'LOGOUT':

@@ -11,7 +11,7 @@ class AccountResource {
 
     get() {
         return this.$timeout(() => ({
-            authorities: ['ROLE_USER', 'ROLE_ADMIN']
+            roles: ['USER', 'ADMIN']
         }), 250);
     }
 }

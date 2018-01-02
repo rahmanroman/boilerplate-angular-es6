@@ -37,7 +37,7 @@ class AccountStore extends Store {
                 ...response
             }), 'UPDATE');
 
-            this.AuthStore.setRoles(this.state.authorities);
+            this.AuthStore.setRoles(this.state.roles);
         });
     }
 

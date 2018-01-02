@@ -47,8 +47,20 @@ class AuthStoreService extends Store {
         }), 'SET_ROLES', roles);
     }
 
+    isAuthenticated() {
+        return (this.state.token !== null && this.state.roles.length > 0);
+    }
+
     hasAuthorities(authorities = []) {
-        return authorities.reduce((acc, role) => (acc && this.state.roles.includes(role)), true);
+        // return authorities.reduce((acc, role) => (acc && this.state.roles.includes(role)), true);
+
+        return authorities.reduce((acc, role) => {
+            if (role.startsWith('^')) {
+                return (acc && !this.state.roles.includes(role.slice(1)));
+            } else {
+                return (acc && this.state.roles.includes(role));
+            }
+        }, true);
     }
 }
 

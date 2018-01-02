@@ -5,7 +5,7 @@ import { Route, Inject } from "bootstrap";
     url: '/login',
 
     data: {
-        authorities: [/*'^ROLE_USER'*/]
+        authorities: ['^USER']
     },
 
     templateUrl: 'states/login/login.html',
